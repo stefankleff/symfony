@@ -114,4 +114,10 @@ class DateTimeValidatorTest extends ConstraintValidatorTestCase
             ['Y-m-d H:i:s', '2010-01-01 00:00:60', DateTime::INVALID_TIME_ERROR],
         ];
     }
+
+    public function testDateTimeWithTrailingData()
+    {
+        $this->validator->validate('1995-05-10 00:00:00', new DateTime('Y-m-d+'));
+        $this->assertNoViolation();
+    }
 }

@@ -64,6 +64,8 @@ class DateTimeValidator extends DateValidator
                     ->setParameter('{{ value }}', $this->formatValue($value))
                     ->setCode(DateTime::INVALID_TIME_ERROR)
                     ->addViolation();
+            } elseif ('Trailing data' === $warning && '+' === substr($constraint->format, -1)) {
+                return;
             } else {
                 $this->context->buildViolation($constraint->message)
                     ->setParameter('{{ value }}', $this->formatValue($value))
